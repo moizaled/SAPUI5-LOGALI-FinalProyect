@@ -1,0 +1,157 @@
+<mvc:View 
+    controllerName="logaligroup11.Employees1.controller.viewEmployee"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:c="sap.suite.ui.commons">
+
+    <Shell id="shell">
+
+        <App id="app">
+            <pages>
+                <Page id="listEmployee" showHeader="false" title="{i18n>listEmployee}">
+
+                    <content>
+
+                        <SplitApp id="splitappid" masterButtonText="Master" masterNavigate="" afterMasterNavigate="" masterButton="" detailNavigate="">
+
+                            <masterPages>
+
+                                <Page id="employeepageid" titleLevel="Auto" showNavButton="false" showHeader="true" showSubHeader="true" navButtonText="" navButtonTooltip="" enableScrolling="true" icon="" navButtonTap="" navButtonPress="">
+
+                                    <content>
+
+                                        <List id="emplist" items="{
+                                            
+                                            path: 'finalProjectModel>/Users',
+                                            filters: [
+                                                       {
+                                                         path: 'SapId',
+                                                         operator: 'EQ',
+                                                         value1: 'moizaled@gmail.com'
+                                                       }
+                                                     ]
+                                            }">
+
+                                            <headerToolbar>
+                                                <Toolbar>
+                                                    <content>
+
+                                                        <ToolbarSpacer />
+
+                                                        <SearchField search="onSearch" width="100%">
+
+                                                        </SearchField>
+                                                    </content>
+                                                </Toolbar>
+                                            </headerToolbar>
+
+                                            <items>
+
+                                                <ObjectListItem title="{finalProjectModel>FirstName} {finalProjectModel>LastName}" type="Navigation" press="onDetailEmployee">
+
+                                                    <ObjectAttribute text="{finalProjectModel>Dni}">
+
+
+                                                    </ObjectAttribute>
+
+                                                </ObjectListItem>
+
+                                            </items>
+
+                                        </List>
+
+                                    </content>
+
+                                </Page>
+
+                            </masterPages>
+
+                            <detailPages>
+
+                                <Page id="detailtitlepageid" title= "{i18n>EmployeeDetails}" titleLevel="Auto" showHeader="true" showSubHeader="false">
+
+                                    <FlexBox alignItems="Center" justifyContent="Center" height="100%">
+                                        <Text text="{i18n>SelectEmployee}"></Text>
+                                    </FlexBox>
+
+                                </Page>
+
+                                <Page id="detailpageid" title= "{i18n>EmployeeDetails}" titleLevel="Auto" showNavButton="false" showHeader="true" showSubHeader="true" navButtonText="" navButtonTooltip="" enableScrolling="true" icon="" navButtonTap="" navButtonPress="">
+
+                                    <content>
+
+                                        <ObjectHeader icon="{= ${finalProjectModel>Type} === '0' ? 'sap-icon://employee-pane' :
+                         ${finalProjectModel>Type} === '1' ? 'sap-icon://employee'  :
+                         'sap-icon://leads' }" iconDensityAware="false" iconAlt="Esto es una prueba" responsive="true" title="{finalProjectModel>FirstName}   {finalProjectModel>LastName}" intro="{finalProjectModel>Dni}">
+                                            <statuses>
+                                                <ObjectStatus text="{i18n>commentsemployee}: {finalProjectModel>Comments}" />
+                                            </statuses>
+                                            <ObjectAttribute text="{i18n>incorportationDate}: {
+                                             path: 'finalProjectModel>CreationDate',
+                                             type: 'sap.ui.model.type.Date',
+                                             formatOptions: {
+					                               style : 'long'
+				                                            }
+                                             }" />
+                                            <ObjectAttribute text="{i18n>typeEmployee}: {= ${finalProjectModel>Type} === '0' ? ${i18n>btnInter} :
+                                             ${finalProjectModel>Type} === '1' ? ${i18n>btnSelf} :
+                                              ${i18n>btnManage} }" />
+
+                                        </ObjectHeader>
+
+                                        <IconTabBar id="idIconTabBarMulti" expanded="{device>/isNoPhone}" class="sapUiResponsiveContentPadding">
+
+                                            <items>
+
+                                                <IconTabFilter icon="sap-icon://attachment" key="attachments">
+
+                                                    <UploadCollection id="uploadCollection" maximumFilenameLength="55" maximumFileSize="10" multiple="true" sameFilenameAllowed="true" instantUpload="true" uploadUrl="/sap/opu/odata/sap/ZEMPLOYEES_SRV/Attachments" change="onFileChange" uploadComplete="onFileUploadComplete" beforeUploadStarts="onFileBeforeUpload" fileDeleted="onFileDeleted" />
+
+                                                </IconTabFilter>
+
+                                                <IconTabFilter icon="sap-icon://history" key="history">
+
+                                                    <c:Timeline id="idTimeline" enableDoubleSided="true" content="{finalProjectModel>UserToSalary}" enableModelFilter="false" showTimeFilter="false" groupBy="CreationDate" sortOldestFirst="true" showSearch="false" showSort="false">
+
+                                                        <c:content>
+
+                                                            <c:TimelineItem id="idTemplateItem" dateTime="{finalProjectModel>CreationDate}" title="{finalProjectModel>Ammount}" text="{finalProjectModel>Comments}" userName="{FirstName} {LastName}">
+
+                                                            </c:TimelineItem>
+
+                                                        </c:content>
+
+                                                    </c:Timeline>
+
+                                                </IconTabFilter>
+
+                                            </items>
+                                        </IconTabBar>
+
+                                    </content>
+
+                                    <footer>
+                                        <Bar>
+                                            <contentRight>
+                                                <Button text="{i18n>downEmployee}" press="downEmployee" />
+                                                <Button text="{i18n>riseEmployee}" press="riseEmployee" />
+                                            </contentRight>
+                                        </Bar>
+                                    </footer>
+
+                                </Page>
+
+                            </detailPages>
+
+                        </SplitApp>
+
+                    </content>
+
+                </Page>
+
+            </pages>
+
+        </App>
+
+    </Shell>
+</mvc:View>                    

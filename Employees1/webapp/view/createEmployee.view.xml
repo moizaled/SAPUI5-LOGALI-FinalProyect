@@ -1,0 +1,177 @@
+<mvc:View xmlns:calendar="sap.ui.unified.calendar" controllerName="logaligroup11.Employees1.controller.createEmployee"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+    xmlns:u="sap.ui.unified">
+    <NavContainer id="wizardNavContainer">
+        <pages>
+            <Page title="{i18n>createEmployee}" id="wizardContentPage" showHeader="false">
+                <content>
+
+                    <Wizard id="CreateEmployeeWizard" class="sapUiResponsivePadding--header sapUiResponsivePadding--content" complete="wizardCompletedHandler">
+
+                        <WizardStep id="EmployeeTypeStep" title="{i18n>employeeType}" validated="false">
+
+                            <MessageStrip class="sapUiSmallMarginBottom" text="{i18n>textstep1}" showIcon="true" />
+
+                            <HBox alignItems="Center" justifyContent="Center" width="100%">
+
+                                <Button id="btnInterEmployee" text="{i18n>btnInter}" press="onbtnInter" class="sapUiSmallMarginEnd" />
+                                <Button id="btnSelfEmployee" text="{i18n>btnSelf}" press="onbtnSelf" class="sapUiSmallMarginEnd" />
+                                <Button id="btnManageEmployee" text="{i18n>btnManage}" press="onbtnManage" class="sapUiSmallMarginEnd" />
+                            </HBox>
+
+                        </WizardStep>
+
+                        <WizardStep id="EmployeeDataStep" validated="false" title="{i18n>EmployeeData}" activate="dataInfoValidation">
+
+                            <MessageStrip class="sapUiSmallMarginBottom" text="{i18n>textstep2}" showIcon="true" />
+
+                            <form:SimpleForm editable="true">
+
+                                <Label text="{i18n>employeename}" required="true" visible="{finalProjectModel1>/visibilityenl}" />
+
+                                <Input valueState="{finalProjectModel1>/FirstNameState}" id="EmmployeeName" change="dataInfoValidation" placeholder="{i18n>valename}" value="{finalProjectModel1>/FirstName}" visible="{finalProjectModel1>/visibilityeni}" />
+
+                                <Label text="{i18n>employeelastname}" required="true" visible="{finalProjectModel1>/visibilityelnl}" />
+
+                                <Input valueState="{finalProjectModel1>/LastNameState}" id="EmmployeeLastName" change="dataInfoValidation" placeholder="{i18n>valeLastname}" value="{finalProjectModel1>/LastName}" visible="{finalProjectModel1>/visibilityelni}" />
+
+                                <Label text="{i18n>employeedni}" required="true" visible= "{finalProjectModel1>/visibilityednil}" />
+
+                                <Input valueState="{finalProjectModel1>/EmployeeDNI}" id="EmmployeeDNI" change="dataInfoValidation" placeholder="{i18n>valeemployeedni}" value="{finalProjectModel1>/dni}" visible="{finalProjectModel1>/visibilityednii}" />
+
+                                <Label text="{i18n>employeecif}" required="true" visible= "{finalProjectModel1>/visibilityecifl}" />
+
+                                <Input valueState="{finalProjectModel1>/EmployeeCIF}" id="EmmployeeCIF" change="dataInfoValidation" placeholder="{i18n>valeemployeecif}" value="{finalProjectModel1>/cif}" visible="{finalProjectModel1>/visibilityecifi}" />
+
+                                <Label text="{i18n>employeesg}" visible= "{finalProjectModel1>/visibilityesgl}" />
+
+                                <Slider enableTickmarks="true" value="{finalProjectModel1>/EmployeeSalary}" min="{finalProjectModel1>/EmployeeMinSalary}" max="{finalProjectModel1>/EmployeeMaxSalary}" step="{finalProjectModel1>/stepEmployee}" class="sapUiMediumMarginBottom" width="100%" visible="{finalProjectModel1>/visibilityesgi}" />
+
+                                <Label text="{i18n>employeeds}" visible= "{finalProjectModel1>/visibilityeedsl}" />
+
+                                <Slider enableTickmarks="true" value="{finalProjectModel1>/EmployeeDailySalary}" min="100" max="2000" step="100" class="sapUiMediumMarginBottom" width="100%" visible="{finalProjectModel1>/visibilityeedsi}" />
+
+                                <Label text="{i18n>incorporateDate}" required="true" />
+
+                                <DatePicker dateValue="{finalProjectModel1>/incorporateDate}" valueState="{finalProjectModel1>/incorporateDateState}" change="dataInfoValidation" displayFormat="long" />
+
+                            </form:SimpleForm>
+
+
+                        </WizardStep>
+
+                        <WizardStep id="EmployeeOptionalInfoStep" validated="true" activate="optionalStepActivation" title="{i18n>OptionalEmployeeData}">
+
+                            <MessageStrip class="sapUiSmallMarginBottom" text="{i18n>textstep3}" showIcon="true" />
+
+                            <TextArea value="{finalProjectModel1>/Comments}" rows="8" width="33cm" />
+
+                            <UploadCollection id="uploadCollection" maximumFilenameLength="55" maximumFileSize="10" multiple="true" sameFilenameAllowed="true" instantUpload="false" uploadUrl="/sap/opu/odata/sap/ZEMPLOYEES_SRV/Attachments" change="onFileChange" uploadComplete="onFileUploadComplete" beforeUploadStarts="onFileBeforeUpload" fileDeleted="onFileDeleted" />
+
+                        </WizardStep>
+
+                    </Wizard>
+
+                </content>
+
+                <footer>
+                    <OverflowToolbar>
+                        <ToolbarSpacer />
+                        <Button text="{i18n>cancelWizard}" press="handleWizardCancel" />
+                    </OverflowToolbar>
+                </footer>
+
+            </Page>
+
+            <Page title="{i18n>createEmployee}" id="wizardReviewPage" showHeader="true">
+
+                <Page title="{i18n>resumeEmployee}" showHeader="true">
+
+                    <content>
+                        <form:SimpleForm title="{i18n>employeeTypeResume}" minWidth="1024" editable="false" layout="ResponsiveGridLayout">
+                            <form:content>
+                                <Label text="{i18n>typeResume}" />
+                                <Text id="EmployeeTypeChosen" text="{= ${finalProjectModel1>/Type} === '0' ? 'Internal' :
+                                      ${finalProjectModel1>/Type} === '1' ? 'Self Employee'  :
+                                      ${finalProjectModel1>/Type} === '2' ? 'Manager' : '' }" />
+                                <Link press="editStepOne" text="{i18n>edit}" />
+                            </form:content>
+                        </form:SimpleForm>
+
+                        <form:SimpleForm title="{i18n>employeeDataResume}" minWidth="1024" editable="false" layout="ResponsiveGridLayout">
+
+                            <form:content>
+
+                                <Label text="{i18n>employeename}" />
+                                <Text id="EmployeeNameChosen" text="{finalProjectModel1>/FirstName}" />
+
+                                <Label text="{i18n>employeelastname}" />
+                                <Text id="EmployeeLastNameChosen" text="{finalProjectModel1>/LastName}" />
+
+                                <Label text="{i18n>employeedni}" visible="{finalProjectModel1>/visibilityednii}" />
+                                <Text id="DNIEmployee" text="{finalProjectModel1>/dni}" visible="{finalProjectModel1>/visibilityednii}" />
+
+                                <Label text="{i18n>employeecif}" visible="{finalProjectModel1>/visibilityecifi}" />
+                                <Text id="CIFEmployee" text="{finalProjectModel1>/cif}" visible="{finalProjectModel1>/visibilityecifi}" />
+
+                                <Label text="{i18n>employeesg}" visible="{finalProjectModel1>/visibilityesgi}" />
+                                <Text id="SalaryEmployee" text="{finalProjectModel1>/EmployeeSalary}" visible="{finalProjectModel1>/visibilityesgi}" />
+
+                                <Label text="{i18n>employeeds}" visible="{finalProjectModel1>/visibilityeedsi}" />
+                                <Text id="DailySalaryEmployee" text="{finalProjectModel1>/EmployeeDailySalary}" visible="{finalProjectModel1>/visibilityeedsi}" />
+
+                                <Label text="{i18n>incorporateDate}" />
+
+                                <Text id="DateEmployee" text="{                                    
+                                                          path: 'finalProjectModel1>/incorporateDate',
+                                                          type: 'sap.ui.model.type.Date',
+                                                          formatOptions: {
+					                                            style : 'long'
+				                                                         }
+                                                               }" />
+                                <Link press="editStepTwo" text="{i18n>edit}" />
+
+
+                            </form:content>
+
+                        </form:SimpleForm>
+
+
+                        <form:SimpleForm title="{i18n>additionalInformation}" minWidth="1024" editable="false" layout="ResponsiveGridLayout">
+
+                            <form:content>
+
+                                <Label text="{i18n>employeecomments}" />
+                                <Text id="EmployeeComments" text="{finalProjectModel1>/Comments}" />
+
+                                <Label text="{i18n>employeeDocuments}" />
+                                <Text id="EmployeeFiles" text="{finalProjectModel1>/Files}" />
+
+                                <Link press="editStepThree" text="{i18n>edit}" />
+
+                            </form:content>
+
+                        </form:SimpleForm>
+
+                    </content>
+
+                    <footer>
+                        <Bar>
+                            <contentRight>
+                                <Button text="{i18n>saveEmployee}" press="handleWizardSubmit" />
+                                <Button text="{i18n>cancelEmployee}" press="handleWizardCancel" />
+                            </contentRight>
+                        </Bar>
+                    </footer>
+                </Page>
+            </Page>
+
+        </pages>
+
+    </NavContainer>
+
+
+</mvc:View>

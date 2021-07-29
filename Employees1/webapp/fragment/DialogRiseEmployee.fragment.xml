@@ -1,0 +1,41 @@
+<core:FragmentDefinition xmlns:control="sap.gantt.control"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:form="sap.ui.layout.form">
+
+    <Dialog title="{i18n>newRiseEmployee}">
+
+        <content>
+
+            <form:SimpleForm editable="true">
+
+                <Label text="{i18n>SalaryEmployee}" required="true" />
+
+                <Input id="SalaryEmployee" change="dataDialogValidation" placeholder="{i18n>SalaryEmployee}" value="{finalProjectModel1>/SalaryEmployee}" valueState="{finalProjectModel1>/SalaryEmployeeStatus}" />
+
+                <Label text="{i18n>incorporateDate}" required="true" />
+
+                <DatePicker dateValue="{finalProjectModel1>/SalaryDateValue}" change="dataDialogValidation" displayFormat="long" valueState="{finalProjectModel1>/SalaryDateValueStatus}"/>
+
+                <Label text="{i18n>commentsEmployee}" required="true" />
+
+                <TextArea value="{finalProjectModel1>/EmployeeComments}" rows="5" width="5cm" />
+
+            </form:SimpleForm>
+
+        </content>
+
+        <Bar>
+            <contentRight>
+
+                <Button text="{i18n>dialogaccept}" press="onAcceptRise" />
+                <Button text="{i18n>dialogcancel}" press="onCancelRise" />
+
+            </contentRight>
+
+        </Bar>
+
+
+    </Dialog>
+
+</core:FragmentDefinition>   
