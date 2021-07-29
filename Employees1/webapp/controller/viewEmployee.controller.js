@@ -7,8 +7,9 @@ sap.ui.define([
     "sap/m/MessageToast",
     "sap/m/MessageBox",
     'sap/ui/model/json/JSONModel',
+    "sap/ui/core/routing/History",
 ],
-    function (Controller, Filter, FilterOperator, ODataModel, MessageToast, MessageBox, JSONModel) {
+    function (Controller, Filter, FilterOperator, ODataModel, MessageToast, MessageBox, JSONModel,History) {
 
         function _onObjectMatched(oEvent) {
 
@@ -366,6 +367,19 @@ sap.ui.define([
                         this.getView().getModel("finalProjectModel1").setProperty("/SalaryDateValueStatus", "None");
                     }
 
+                }
+
+            },
+
+            onBack: function (oEvent) {
+                var oHistory = History.getInstance();
+                var sPreviewHash = oHistory.getPreviousHash();
+
+                if (sPreviewHash !== undefined) {
+                    window.history.go(-1);
+                } else {
+                    var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+                    oRouter.navTo("RouteMain", true);
                 }
 
             }

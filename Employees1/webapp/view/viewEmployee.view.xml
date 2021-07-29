@@ -32,13 +32,15 @@
                                                      ]
                                             }">
 
-                                            <headerToolbar>
-                                                <Toolbar>
+                                            <headerToolbar >
+                                                <Toolbar >
                                                     <content>
 
                                                         <ToolbarSpacer />
-
-                                                        <SearchField search="onSearch" width="100%">
+                                                        
+                                                        <Button type="Back" tooltip="{i18n>back}" press="onBack"/>
+                        
+                                                        <SearchField  search="onSearch" width="100%">
 
                                                         </SearchField>
                                                     </content>
