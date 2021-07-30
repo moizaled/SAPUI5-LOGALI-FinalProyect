@@ -100,7 +100,7 @@ sap.ui.define([
                 var oModel = new ODataModel("TimelineOData.Timeline/", true);
                 this.getView().byId("uploadCollection").bindAggregation("items", {
 
-                    path: "finalProjectModel>/Users(EmployeeId='" + oEmployeeid + "',SapId='" + osapid + "')" + "/UserToAttachment"
+                    path: "finalProjectModel>UserToAttachment"
                     ,
                     template: new sap.m.UploadCollectionItem({
                         documentId: "{finalProjectModel>AttId}",

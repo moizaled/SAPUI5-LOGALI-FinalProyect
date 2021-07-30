@@ -27,7 +27,7 @@ sap.ui.define([
 			this.setModel(models.createDeviceModel(), "device");
         },
         
-        SapId: "moizaled@gmail.com"
+        SapId: "moizaled2@gmail.com"
         
 	});
 });
