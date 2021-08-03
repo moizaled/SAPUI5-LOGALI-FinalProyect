@@ -477,7 +477,6 @@ sap.ui.define([
 
                                 var lv_Comments = this.getView().getModel("finalProjectModel1").getProperty("/Comments");
 
-
                                 var body = {
 
                                     SapId: this.getOwnerComponent().SapId,

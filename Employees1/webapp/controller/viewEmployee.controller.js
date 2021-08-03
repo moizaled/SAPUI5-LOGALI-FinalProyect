@@ -9,11 +9,18 @@ sap.ui.define([
     'sap/ui/model/json/JSONModel',
     "sap/ui/core/routing/History",
 ],
-    function (Controller, Filter, FilterOperator, ODataModel, MessageToast, MessageBox, JSONModel,History) {
+    function (Controller, Filter, FilterOperator, ODataModel, MessageToast, MessageBox, JSONModel, History) {
 
         function _onObjectMatched(oEvent) {
 
             this.getView().byId("emplist").getBinding("items").refresh();
+
+            var oFilterSapId = new Filter("SapId",
+                sap.ui.model.FilterOperator.EQ, this.getOwnerComponent().SapId);
+            // manual filtering
+            this.getView().byId("emplist").getBinding("items").filter(oFilterSapId);
+
+
             var splitApp = this.getView().byId("splitappid");
             splitApp.to(this.getView().byId("detailtitlepageid"));
 
@@ -46,7 +53,7 @@ sap.ui.define([
 
             onSearch: function (oEvent) {
 
-                // Build Filter
+                // Build Filter...
 
                 var aFilter = [];
                 var sQuery = oEvent.getParameter("query");
@@ -56,6 +63,9 @@ sap.ui.define([
                     aFilter.push(new Filter("FirstName", FilterOperator.Contains, sQuery));
                     //                   aFilter.push(new Filter("Dni", FilterOperator.Contains, sQuery));
                 }
+
+                aFilter.push(new Filter("SapId",
+                    FilterOperator.EQ, this.getOwnerComponent().SapId));
 
                 //Filter binding Over the list
 
@@ -383,6 +393,8 @@ sap.ui.define([
                 }
 
             }
+
+
             /*
                 */
 

@@ -1,5 +1,4 @@
-<mvc:View 
-    controllerName="logaligroup11.Employees1.controller.viewEmployee"
+<mvc:View controllerName="logaligroup11.Employees1.controller.viewEmployee"
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
     xmlns="sap.m"
     xmlns:c="sap.suite.ui.commons">
@@ -22,14 +21,8 @@
 
                                         <List id="emplist" items="{
                                             
-                                            path: 'finalProjectModel>/Users',
-                                            filters: [
-                                                       {
-                                                         path: 'SapId',
-                                                         operator: 'EQ',
-                                                         value1: 'moizaled2@gmail.com'
-                                                       }
-                                                     ]
+                                            path: 'finalProjectModel>/Users'
+                                            
                                             }">
 
                                             <headerToolbar >
@@ -37,10 +30,10 @@
                                                     <content>
 
                                                         <ToolbarSpacer />
-                                                        
-                                                        <Button type="Back" tooltip="{i18n>back}" press="onBack"/>
-                        
-                                                        <SearchField  search="onSearch" width="100%">
+
+                                                        <Button type="Back" tooltip="{i18n>back}" press="onBack" />
+
+                                                        <SearchField search="onSearch" width="100%">
 
                                                         </SearchField>
                                                     </content>
