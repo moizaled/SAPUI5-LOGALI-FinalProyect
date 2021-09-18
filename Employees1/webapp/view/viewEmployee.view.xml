@@ -8,9 +8,7 @@
         <App id="app">
             <pages>
                 <Page id="listEmployee" showHeader="false" title="{i18n>listEmployee}">
-
                     <content>
-
                         <SplitApp id="splitappid" masterButtonText="Master" masterNavigate="" afterMasterNavigate="" masterButton="" detailNavigate="">
 
                             <masterPages>
@@ -28,13 +26,9 @@
                                             <headerToolbar >
                                                 <Toolbar >
                                                     <content>
-
                                                         <ToolbarSpacer />
-
                                                         <Button type="Back" tooltip="{i18n>back}" press="onBack" />
-
                                                         <SearchField search="onSearch" width="100%">
-
                                                         </SearchField>
                                                     </content>
                                                 </Toolbar>
@@ -100,7 +94,7 @@
 
                                                 <IconTabFilter icon="sap-icon://attachment" key="attachments">
 
-                                                    <UploadCollection id="uploadCollection" maximumFilenameLength="55" maximumFileSize="10" multiple="true" sameFilenameAllowed="true" instantUpload="true" uploadUrl="/sap/opu/odata/sap/ZEMPLOYEES_SRV/Attachments" change="onFileChange" uploadComplete="onFileUploadComplete" beforeUploadStarts="onFileBeforeUpload" fileDeleted="onFileDeleted" />
+                                                    <UploadCollection id="uploadCollection" maximumFilenameLength="55" maximumFileSize="10" multiple="true" sameFilenameAllowed="true" instantUpload="true" uploadUrl="sap/opu/odata/sap/ZEMPLOYEES_SRV/Attachments" change="onFileChange" uploadComplete="onFileUploadComplete" beforeUploadStarts="onFileBeforeUpload" fileDeleted="onFileDeleted" />
 
                                                 </IconTabFilter>
 
@@ -149,4 +143,5 @@
         </App>
 
     </Shell>
+
 </mvc:View>                    
